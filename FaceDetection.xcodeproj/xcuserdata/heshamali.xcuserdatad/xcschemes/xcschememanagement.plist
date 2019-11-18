@@ -7,7 +7,25 @@
 		<key>FaceDetection.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>6</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0413242223815A67002A40DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0413243623815A6C002A40DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0413244123815A6D002A40DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
