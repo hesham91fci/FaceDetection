@@ -10,98 +10,46 @@ import Foundation
 import UIKit
 import Alamofire
 import RxSwift
-class FaceDetectorService {
-    static func getFaces(image: UIImage) /*-> Observable<FaceDetection>*/ {
+struct FaceDetectorService {
+    static func getFaces(image: UIImage) -> Observable<FaceDetection> {
         let faceDetectionRequest = try! APIRouter.detectFaces(image: image).asURLRequest()
-        request(faceDetectionRequest)
+        return request(faceDetectionRequest)
     }
     
-    private static func request(_ urlConvertible: URLRequestConvertible) /*-> Observable<T>*/ {
-        
-        let task = URLSession.shared.uploadTask(with: urlConvertible.urlRequest!, from: urlConvertible.urlRequest!.httpBody!) {(data
-            , response, error) in
-            if let error = error {
-                print ("error: \(error)")
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse else {
-                    return
-            }
-            
-            if !(200...209).contains(response.statusCode){
-                switch response.statusCode {
-                case 403:
-                    print("hi")
-                //  observer.onError(ApiError.forbidden)
-                case 404:
-                    print("hi")
-                //  observer.onError(ApiError.notFound)
-                case 409:
-                    print("hi")
-                //  observer.onError(ApiError.conflict)
-                case 500:
-                    print("hi")
-                //  observer.onError(ApiError.internalServerError)
-                default:
-                    print("hi")
-                    //  observer.onError(error)
+    private static func request<T:Codable>(_ urlConvertible: URLRequestConvertible) -> Observable<T> {
+        return Observable<T>.create { observer in
+            APIManager.shared().request(urlConvertible).responseJSON { (response: DataResponse) in
+                switch response.result {
+                case .success:
+                    let decoder = JSONDecoder()
+                    do{
+                        let t = try decoder.decode(T.self, from: response.data!)
+                        observer.onNext(t)
+                    }
+                    catch{
+                        observer.onError(ApiError.internalServerError)
+                    }
+                case .failure(let error):
+                    handleError(response: response,error: error,observer: observer)
                 }
             }
-            
-            if let data = data{
-            
-                let decoder = JSONDecoder()
-                do{
-                    let faces = try decoder.decode(FaceDetection.self, from: data)
-                    print("succeeded")
-                    //observer.onNext(t)
-                }
-                catch{
-                    print("couldn't parse")
-                    //observer.onError(ApiError.internalServerError)
-                }
-            }
+            return Disposables.create()
         }
-        
-        task.resume()
-//        //return Observable<T>.create { observer in
-//            APIManager.shared().upload(urlConvertible.urlRequest!.httpBody!, to: urlConvertible.urlRequest!.url!.description).responseJSON { (response: DataResponse) in
-//
-//                switch response.result {
-//                case .success(let value):
-//                    let decoder = JSONDecoder()
-//                    do{
-//                        let faces = try decoder.decode(FaceDetection.self, from: response.data!)
-//                        print("succeeded")
-//                        //observer.onNext(t)
-//                    }
-//                    catch{
-//                        //observer.onError(ApiError.internalServerError)
-//                    }
-//                    //observer.onCompleted()
-//                case .failure(let error):
-//                    switch response.response?.statusCode {
-//                    case 403:
-//                        print("hi")
-//                      //  observer.onError(ApiError.forbidden)
-//                    case 404:
-//                        print("hi")
-//                      //  observer.onError(ApiError.notFound)
-//                    case 409:
-//                        print("hi")
-//                      //  observer.onError(ApiError.conflict)
-//                    case 500:
-//                        print("hi")
-//                      //  observer.onError(ApiError.internalServerError)
-//                    default:
-//                        print("hi")
-//                      //  observer.onError(error)
-//                    }
-//                }
-//            }
-//            //return Disposables.create()
-//        //}
+    }
+    
+    private static func handleError<T:Codable>(response:DataResponse<Any>,error:Error,observer:AnyObserver<T>){
+        switch response.response?.statusCode {
+        case 403:
+            observer.onError(ApiError.forbidden)
+        case 404:
+            observer.onError(ApiError.notFound)
+        case 409:
+            observer.onError(ApiError.conflict)
+        case 500:
+            observer.onError(ApiError.internalServerError)
+        default:
+            observer.onError(error)
+        }
     }
 
 }

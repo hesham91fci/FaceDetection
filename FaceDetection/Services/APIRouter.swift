@@ -31,13 +31,33 @@ enum APIRouter: URLRequestConvertible {
     
     // MARK: - Parameters
     private var parameters: Parameters? {
+        func convertToDictionary(text:String)->[String:Any]?{
+            if let data = text.data(using: .utf8) {
+                do {
+                    return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            return nil
+        }
         switch self {
         case .detectFaces(let image):
-            let base64Image = (image.jpegData(compressionQuality: 0.25)?.base64EncodedString())!
-            let base64: [String:Any] = ["base64":base64Image]
-            let imageJSON: [String:Any] = ["image":base64]
-            let data: [String:Any] = ["data":imageJSON]
-            return [Environment.APIParameterKey.inputs: [data]]
+            let base64Image = (image.jpegData(compressionQuality: 0.25)?.base64EncodedString()) ?? ""
+            let imageObj = Image(base64: base64Image)
+            let dataObj = DataClass(image: imageObj)
+            let inputObj = Input(data: dataObj)
+            let inputsContainerObj = FaceInput(inputs: [inputObj])
+            
+            let encoder = JSONEncoder()
+            do {
+                let jsonData = try encoder.encode(inputsContainerObj)
+                
+                return convertToDictionary(text: String(data: jsonData, encoding: .utf8)!)
+                
+            } catch _ as NSError {
+                return nil
+            }
         }
     }
     
