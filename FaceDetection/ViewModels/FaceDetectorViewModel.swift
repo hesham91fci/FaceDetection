@@ -42,21 +42,11 @@ struct FaceDetectorViewModel {
         let imageHeight = image.bounds.height
         if let output = faceResponse.outputs.first{
             output.data.regions.forEach { (region) in
-                
                 let boundingBox = region.regionInfo.boundingBox
-                
                 let rectangle = CGRect(x: imageWidth * CGFloat(boundingBox.leftCol),
                                        y: imageHeight * CGFloat(boundingBox.topRow),
                                        width: (CGFloat(boundingBox.rightCol) * imageWidth) - (CGFloat(boundingBox.leftCol) * imageWidth),
                                        height: (CGFloat(boundingBox.bottomRow) * imageHeight) - (CGFloat(boundingBox.topRow) * imageHeight))
-//                rectangle.move(to: CGPoint.init(x: imageWidth * CGFloat(boundingBox.topRow) , y: imageHeight * CGFloat(boundingBox.topRow)))
-//
-//                rectangle.addLine(to: CGPoint.init(x: imageWidth * CGFloat(boundingBox.leftCol) , y: imageHeight * CGFloat(boundingBox.leftCol)))
-//
-//                rectangle.addLine(to: CGPoint.init(x: imageWidth * CGFloat(boundingBox.rightCol) , y: imageHeight * CGFloat(boundingBox.rightCol))
-//                )
-//
-//                rectangle.addLine(to: CGPoint.init(x: imageWidth * CGFloat(boundingBox.bottomRow) , y: imageHeight * CGFloat(boundingBox.bottomRow)))
                 faceBoundaries.append(rectangle)
             }
         }
