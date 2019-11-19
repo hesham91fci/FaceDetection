@@ -47,6 +47,9 @@ class FacesViewController: UIViewController {
                 for i in 0..<faceImages.count{
                     if let faceRegions = self.faceRegions{
                         let faceTextField = UITextField.init(frame: CGRect(x: faceRegions[i].minX, y: faceRegions[i].minY, width: 50, height: 30))
+                        faceTextField.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe({ _ in
+                            print("pressed enter")
+                        }).disposed(by: self.disposeBag)
                         faceTextField.backgroundColor = .white
                         self.view.addSubview(faceTextField)
                         
