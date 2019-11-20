@@ -35,3 +35,7 @@ enum ApiError: Error {
     case internalServerError    //Status code 500
 }
 
+struct UserDefaultsKeys {
+    static let pictures = "pictures"
+}
+

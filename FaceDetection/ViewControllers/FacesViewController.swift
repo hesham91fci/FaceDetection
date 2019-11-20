@@ -15,12 +15,14 @@ class FacesViewController: UIViewController {
     @IBOutlet weak var mainImage: UIImageView!
     let faceDetectorViewModel:FaceDetectorViewModel = FaceDetectorViewModel()
     let faceCropViewModel:FaceCropViewModel = FaceCropViewModel()
+    let faceSaveViewModel:FaceSaveViewModel = FaceSaveViewModel()
     let disposeBag = DisposeBag()
     var faceRegions:[CGRect]?
     var count = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         initSubscribers()
+        //self.registerImagePickingDelegate()
         faceDetectorViewModel.recognizeFaces(image: self.mainImage)
     }
     
@@ -48,13 +50,11 @@ class FacesViewController: UIViewController {
                     if let faceRegions = self.faceRegions{
                         let faceTextField = UITextField.init(frame: CGRect(x: faceRegions[i].minX, y: faceRegions[i].minY, width: 50, height: 30))
                         faceTextField.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe({ _ in
-                            print("pressed enter")
+                            self.faceSaveViewModel.savePictureInfo(personFace: faceImages[i], personName: faceTextField.text!, mainImage: self.mainImage.image!, faceRegion: faceRegions[i])
                         }).disposed(by: self.disposeBag)
                         faceTextField.backgroundColor = .white
                         self.view.addSubview(faceTextField)
-                        
                     }
-                    
                 }
             }
         }.disposed(by: disposeBag)
