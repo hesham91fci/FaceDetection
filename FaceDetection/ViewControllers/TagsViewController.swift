@@ -23,6 +23,10 @@ class TagsViewController: UIViewController {
         super.viewDidLoad()
         initSubscribers()
         //self.registerImagePickingDelegate()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         faceDetectorViewModel.recognizeFaces(image: self.mainImage)
     }
     

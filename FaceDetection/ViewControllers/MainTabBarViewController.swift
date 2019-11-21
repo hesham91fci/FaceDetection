@@ -15,12 +15,21 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        self.tabBarController?.selectedIndex = 1
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print("changing")
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        registerDelegateForCameraViewController()
     }
+    
+    func registerDelegateForCameraViewController(){
+        self.viewControllers?.forEach({ (controller) in
+            if let cameraViewController = controller as? CameraViewController{
+                cameraViewController.mainTabBarController = self
+            }
+        })
+    }
+    
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
@@ -30,14 +39,15 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
             facesViewController.faceSaveViewModel = faceSaveViewModel
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func changeToTagsViewController(image:UIImage){
+        self.selectedIndex = 1
+        self.viewControllers?.forEach({ (controller) in
+            if let tagsViewController = controller as? TagsViewController{
+                tagsViewController.mainImage.image = image
+                tagsViewController.faceSaveViewModel = faceSaveViewModel
+            }
+        })
     }
-    */
 
 }

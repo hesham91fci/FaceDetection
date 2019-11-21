@@ -29,7 +29,6 @@
 		04FCC906238316B6008FB1DD /* BusyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC905238316B6008FB1DD /* BusyLoader.swift */; };
 		04FCC908238462C1008FB1DD /* FaceCropViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC907238462C1008FB1DD /* FaceCropViewModel.swift */; };
 		04FCC90A23846DEF008FB1DD /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC90923846DEF008FB1DD /* Tag.swift */; };
-		04FCC90F2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC90E2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift */; };
 		04FCC9112385BAA9008FB1DD /* FaceSaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC9102385BAA9008FB1DD /* FaceSaveViewModel.swift */; };
 		04FCC9132385BBB4008FB1DD /* Pictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC9122385BBB4008FB1DD /* Pictures.swift */; };
 		04FCC9162385EBFD008FB1DD /* FacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC9152385EBFD008FB1DD /* FacesTableViewCell.swift */; };
@@ -37,6 +36,7 @@
 		5A05A1F5D3DD7A058CB25386 /* Pods_FaceDetectionUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D4895C658ACBFA2E83FE6D /* Pods_FaceDetectionUITests.framework */; };
 		6B6AFC383D0C35046AF7D303 /* Pods_FaceDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE62DCA03CCBBFD1E1C1C17B /* Pods_FaceDetection.framework */; };
 		C039235EFF4C3A1C583104FD /* Pods_FaceDetectionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D88E6F07127B4A2FC702A8 /* Pods_FaceDetectionTests.framework */; };
+		D82E438B23866CDC00136EA9 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E438A23866CDC00136EA9 /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,6 @@
 		04FCC905238316B6008FB1DD /* BusyLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusyLoader.swift; sourceTree = "<group>"; };
 		04FCC907238462C1008FB1DD /* FaceCropViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCropViewModel.swift; sourceTree = "<group>"; };
 		04FCC90923846DEF008FB1DD /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
-		04FCC90E2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TagsViewController+ImagePickerDelegate.swift"; sourceTree = "<group>"; };
 		04FCC9102385BAA9008FB1DD /* FaceSaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceSaveViewModel.swift; sourceTree = "<group>"; };
 		04FCC9122385BBB4008FB1DD /* Pictures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pictures.swift; sourceTree = "<group>"; };
 		04FCC9152385EBFD008FB1DD /* FacesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesTableViewCell.swift; sourceTree = "<group>"; };
@@ -99,6 +98,7 @@
 		8A96AC37E5AF01E075448F25 /* Pods-FaceDetectionUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceDetectionUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceDetectionUITests/Pods-FaceDetectionUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B8D4895C658ACBFA2E83FE6D /* Pods_FaceDetectionUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceDetectionUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE62DCA03CCBBFD1E1C1C17B /* Pods_FaceDetection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceDetection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D82E438A23866CDC00136EA9 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		DB275ECAC5D214F51959D4FD /* Pods-FaceDetection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceDetection.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceDetection/Pods-FaceDetection.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,9 +234,9 @@
 			isa = PBXGroup;
 			children = (
 				0413242823815A67002A40DA /* TagsViewController.swift */,
-				04FCC90E2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift */,
 				04FCC9172385ED3C008FB1DD /* FacesViewController.swift */,
 				0419DF2C238606C0000A0BB8 /* MainTabBarViewController.swift */,
+				D82E438A23866CDC00136EA9 /* CameraViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -446,23 +446,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FaceDetection/Pods-FaceDetection-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FaceDetection/Pods-FaceDetection-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FaceDetection/Pods-FaceDetection-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FaceDetection/Pods-FaceDetection-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FaceDetection/Pods-FaceDetection-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9C6F46557B2FDAAA050C0A3C /* [CP] Check Pods Manifest.lock */ = {
@@ -509,7 +502,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04FCC9132385BBB4008FB1DD /* Pictures.swift in Sources */,
-				04FCC90F2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift in Sources */,
 				04FCC9112385BAA9008FB1DD /* FaceSaveViewModel.swift in Sources */,
 				0419DF2D238606C0000A0BB8 /* MainTabBarViewController.swift in Sources */,
 				04FCC8F82381861B008FB1DD /* APIRouter.swift in Sources */,
@@ -519,6 +511,7 @@
 				04FCC908238462C1008FB1DD /* FaceCropViewModel.swift in Sources */,
 				04FCC8FE23818C4A008FB1DD /* APIManager.swift in Sources */,
 				04FCC90323831138008FB1DD /* FaceDetectorViewModel.swift in Sources */,
+				D82E438B23866CDC00136EA9 /* CameraViewController.swift in Sources */,
 				04FCC90A23846DEF008FB1DD /* Tag.swift in Sources */,
 				0413245D23816CD2002A40DA /* FaceOutputData.swift in Sources */,
 				04FCC90023830B49008FB1DD /* FaceInput.swift in Sources */,
@@ -705,7 +698,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZTKDN6CBZT;
+				DEVELOPMENT_TEAM = HQSUH8EU7X;
 				INFOPLIST_FILE = FaceDetection/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -724,7 +717,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZTKDN6CBZT;
+				DEVELOPMENT_TEAM = HQSUH8EU7X;
 				INFOPLIST_FILE = FaceDetection/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
