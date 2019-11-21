@@ -20,12 +20,24 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         registerDelegateForCameraViewController()
+        registerDelegateForFacesViewController()
+        if !faceSaveViewModel.getPicturesFromUserDefaults().tagsDictionary.isEmpty{
+            self.changeToFacesViewController()
+        }
     }
     
     func registerDelegateForCameraViewController(){
         self.viewControllers?.forEach({ (controller) in
             if let cameraViewController = controller as? CameraViewController{
                 cameraViewController.mainTabBarController = self
+            }
+        })
+    }
+    
+    func registerDelegateForFacesViewController(){
+        self.viewControllers?.forEach({ (controller) in
+            if let facesViewController = controller as? FacesViewController{
+                facesViewController.mainTabBarController = self
             }
         })
     }
@@ -45,8 +57,24 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         self.viewControllers?.forEach({ (controller) in
             if let tagsViewController = controller as? TagsViewController{
                 tagsViewController.mainImage.image = image
+                tagsViewController.mainImage.image = FaceCropViewModel().resizeImageToImageView(mainImage: tagsViewController.mainImage)
                 tagsViewController.faceSaveViewModel = faceSaveViewModel
             }
+            if let cameraViewController = controller as? CameraViewController{
+                cameraViewController.capturedImage = nil
+            }
+        })
+    }
+    
+    func changeToFacesViewController(){
+        self.selectedIndex = 2
+        self.viewControllers?.forEach({ (controller) in
+            if let cameraViewController = controller as? CameraViewController{
+                cameraViewController.dismiss(animated: true) {
+                    cameraViewController.capturedImage = nil
+                }
+            }
+            
         })
     }
 

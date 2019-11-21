@@ -14,12 +14,35 @@ class FacesViewController: UIViewController {
     let disposeBag = DisposeBag()
     @IBOutlet weak var facesTableView: UITableView!
     var faceSaveViewModel:FaceSaveViewModel?
+    weak var mainTabBarController:MainTabBarViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.subscribeOnFaces()
+        self.subcribeForFaceTap()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.faceSaveViewModel?.observableTags
+        self.faceSaveViewModel?.getPicturesFromUserDefaults()
+    }
+    func subcribeForFaceTap(){
+        self.facesTableView.rx.itemSelected
+        .subscribe(onNext: { [weak self] indexPath in
+            self?.subscribeForPictureTags()
+            self?.faceSaveViewModel?.getPictureForFace(atIndex: indexPath.row)
+        }).disposed(by: disposeBag)
+    }
+    
+    func subscribeForPictureTags(){
+        self.faceSaveViewModel?.observablePictureTags.bind(onNext: { (tags) in
+            if let tag = tags.first,let includingPicture = tag.includingPicture{
+                self.mainTabBarController?.changeToTagsViewController(image: includingPicture)
+            }
+            
+            }).disposed(by: disposeBag)
+    }
+    
+    func subscribeOnFaces(){
+        self.faceSaveViewModel?.observableAllTags
             .bind(to: facesTableView
                 .rx
                 .items(cellIdentifier: "FacesTableViewCell",
@@ -27,11 +50,8 @@ class FacesViewController: UIViewController {
                         cell.configureFaceCell(tag: tag)
             }
             .disposed(by: disposeBag)
-        self.faceSaveViewModel?.observableTags.bind(onNext: { (tags) in
+        self.faceSaveViewModel?.observableAllTags.bind(onNext: { (tags) in
             print("emitted")
         }).disposed(by: disposeBag)
-        self.faceSaveViewModel?.getPicturesFromUserDefaults()
-        
-        
     }
 }

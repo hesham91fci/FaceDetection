@@ -26,14 +26,16 @@ struct FaceDetectorViewModel {
 
     func recognizeFaces(image:UIImageView){
         isLoadingSubject.onNext(true)
-        FaceDetectorService.getFaces(image: image.image!).subscribe(onNext: { [self] faces in
-            self.isLoadingSubject.onNext(false)
-            self.getAllFaces(forImage: image, faceResponse: faces)
-        }, onError: { (error) in
-            self.isLoadingSubject.onNext(false)
-            self.errorSubject.onNext("Problem detecting faces")
+        if let uiImage = image.image{
+            FaceDetectorService.getFaces(image: uiImage).subscribe(onNext: { [self] faces in
+                self.isLoadingSubject.onNext(false)
+                self.getAllFaces(forImage: image, faceResponse: faces)
+            }, onError: { (error) in
+                self.isLoadingSubject.onNext(false)
+                self.errorSubject.onNext("Problem detecting faces")
+            }
+            ).disposed(by: disposeBag)
         }
-        ).disposed(by: disposeBag)
     }
     
     private func getAllFaces(forImage image:UIImageView, faceResponse:FaceDetection){

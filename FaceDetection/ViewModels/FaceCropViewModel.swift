@@ -15,18 +15,23 @@ struct FaceCropViewModel{
         return self.croppedFacesSubject.asObservable()
     }
     func loadImagesFromFaceRegions(faceRegions:[CGRect],mainImage:UIImageView){
-        
             var newFacesImages:[UIImage] = []
             faceRegions.forEach { (rectangle) in
-                let newSize:CGSize =  CGSize(width: mainImage.frame.width,height: mainImage.frame.height)
-                let rect = CGRect(x: 0, y: 0,width: newSize.width,height: newSize.height)
-                UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-                mainImage.image!.draw(in: rect)
-                let newImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                let croppedFace = UIImage(cgImage: newImage!.cgImage!.cropping(to: rectangle)!)
-                newFacesImages.append(croppedFace)
+                if let newImage = self.resizeImageToImageView(mainImage: mainImage){
+                    let croppedFace = UIImage(cgImage: newImage.cgImage!.cropping(to: rectangle)!)
+                    newFacesImages.append(croppedFace)
+                }
             }
             self.croppedFacesSubject.onNext(newFacesImages)
+    }
+    
+    func resizeImageToImageView(mainImage:UIImageView)->UIImage?{
+        let newSize:CGSize =  CGSize(width: mainImage.frame.width,height: mainImage.frame.height)
+        let rect = CGRect(x: 0, y: 0,width: newSize.width,height: newSize.height)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        mainImage.image!.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }

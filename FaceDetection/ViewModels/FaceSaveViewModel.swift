@@ -10,9 +10,13 @@ import Foundation
 import UIKit
 import RxSwift
 struct FaceSaveViewModel {
-    private let savedTagsSubject:BehaviorSubject<[Tag]> = BehaviorSubject(value: [])
-    var observableTags: Observable<[Tag]>{
-        return self.savedTagsSubject.asObservable()
+    private let allTagsSubject:BehaviorSubject<[Tag]> = BehaviorSubject(value: [])
+    private let pictureTagsSubject:BehaviorSubject<[Tag]> = BehaviorSubject(value: [])
+    var observableAllTags: Observable<[Tag]>{
+        return self.allTagsSubject.asObservable()
+    }
+    var observablePictureTags: Observable<[Tag]>{
+        return self.pictureTagsSubject.asObservable()
     }
     fileprivate func saveNewFace(_ savedPictures: inout Pictures, _ mainImage: UIImage, _ personFace: UIImage, _ personName: String, _ faceRegion: CGRect) {
         var tags = savedPictures.tagsDictionary[mainImage.pngData()!] ?? []
@@ -62,7 +66,7 @@ struct FaceSaveViewModel {
             }
         }
         let newPictures = Pictures()
-        self.savedTagsSubject.onNext([])
+        self.allTagsSubject.onNext([])
         return newPictures
     }
     
@@ -80,7 +84,26 @@ struct FaceSaveViewModel {
         loadedPicture.tagsDictionary.forEach { (_, tags) in
             tagsList.append(contentsOf: tags)
         }
-        self.savedTagsSubject.onNext(tagsList)
+        self.allTagsSubject.onNext(tagsList)
+    }
+    
+    func getPictureForFace(atIndex index:Int){
+        if let tagsList = try? self.allTagsSubject.value(){
+            let savedPictures = getPicturesFromUserDefaults()
+            if let mainImage = tagsList[index].includingPicture{
+                if let pictureTags = savedPictures.tagsDictionary[mainImage.pngData()!]{
+                    self.pictureTagsSubject.onNext(pictureTags)
+                }
+            }
+        }
+    }
+    
+    func getPersonNameFromImage(faceImage:UIImage)->String{
+        let pictureTags = try? self.pictureTagsSubject.value()
+        if let personName = pictureTags?.first(where: {return $0.personFace?.pngData() == faceImage.pngData()})?.personName{
+            return personName
+        }
+        return ""
     }
     
 }
