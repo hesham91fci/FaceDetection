@@ -21,8 +21,11 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidAppear(animated)
         registerDelegateForCameraViewController()
         registerDelegateForFacesViewController()
-        if !faceSaveViewModel.getPicturesFromUserDefaults().tagsDictionary.isEmpty{
+        if !faceSaveViewModel.getPicturesFromUserDefaults().tagsDictionary.isEmpty && self.getCameraViewController()?.capturedImage == nil{
             self.changeToFacesViewController()
+        }
+        else{
+            self.getCameraViewController()?.capturedImage = nil
         }
     }
     
@@ -58,11 +61,14 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         self.viewControllers?.forEach({ (controller) in
             if let tagsViewController = controller as? TagsViewController{
                 tagsViewController.mainImage.image = image
-                tagsViewController.mainImage.image = FaceCropViewModel().resizeImageToImageView(mainImage: tagsViewController.mainImage)
+                if let cameraVC = self.getCameraViewController(){
+                    if cameraVC.capturedImage != nil{
+                        tagsViewController.mainImage.image = UIImage(cgImage: (FaceCropViewModel().resizeImageToImageView(mainImage: tagsViewController.mainImage)?.cgImage)!)
+                        cameraVC.dismiss(animated: true, completion: nil)
+                    }
+                }
+
                 tagsViewController.faceSaveViewModel = faceSaveViewModel
-            }
-            if let cameraViewController = controller as? CameraViewController{
-                cameraViewController.capturedImage = nil
             }
         })
     }
@@ -77,6 +83,10 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
             }
             
         })
+    }
+    
+    private func getCameraViewController() -> CameraViewController?{
+        return self.viewControllers?.first(where: {$0 is CameraViewController}) as? CameraViewController
     }
 
 }

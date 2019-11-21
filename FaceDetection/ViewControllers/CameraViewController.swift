@@ -34,9 +34,7 @@ class CameraViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         if let img = info[UIImagePickerController.InfoKey.originalImage] as?
         UIImage {
             self.capturedImage = img
-            self.dismiss(animated: true) {
-                self.mainTabBarController?.changeToTagsViewController(image: img)
-            }
+            self.mainTabBarController?.changeToTagsViewController(image: img)
         } else {
         print("error in taking image")
         }    }
