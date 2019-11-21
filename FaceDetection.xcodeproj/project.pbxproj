@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0413242723815A67002A40DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413242623815A67002A40DA /* AppDelegate.swift */; };
-		0413242923815A67002A40DA /* FacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413242823815A67002A40DA /* FacesViewController.swift */; };
+		0413242923815A67002A40DA /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413242823815A67002A40DA /* TagsViewController.swift */; };
 		0413242C23815A67002A40DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0413242A23815A67002A40DA /* Main.storyboard */; };
 		0413242E23815A6C002A40DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0413242D23815A6C002A40DA /* Assets.xcassets */; };
 		0413243123815A6C002A40DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0413242F23815A6C002A40DA /* LaunchScreen.storyboard */; };
@@ -19,6 +19,7 @@
 		0413245D23816CD2002A40DA /* FaceOutputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413245C23816CD2002A40DA /* FaceOutputData.swift */; };
 		0413245F23816D8E002A40DA /* FaceRegionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413245E23816D8E002A40DA /* FaceRegionData.swift */; };
 		041324652381732F002A40DA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041324642381732F002A40DA /* Alamofire.framework */; };
+		0419DF2D238606C0000A0BB8 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419DF2C238606C0000A0BB8 /* MainTabBarViewController.swift */; };
 		04FCC8F82381861B008FB1DD /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC8F72381861B008FB1DD /* APIRouter.swift */; };
 		04FCC8FA23818648008FB1DD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC8F923818648008FB1DD /* Constants.swift */; };
 		04FCC8FC23818A13008FB1DD /* FaceDetectorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC8FB23818A13008FB1DD /* FaceDetectorService.swift */; };
@@ -28,9 +29,11 @@
 		04FCC906238316B6008FB1DD /* BusyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC905238316B6008FB1DD /* BusyLoader.swift */; };
 		04FCC908238462C1008FB1DD /* FaceCropViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC907238462C1008FB1DD /* FaceCropViewModel.swift */; };
 		04FCC90A23846DEF008FB1DD /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC90923846DEF008FB1DD /* Tag.swift */; };
-		04FCC90F2385B7C1008FB1DD /* FacesViewController+ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC90E2385B7C1008FB1DD /* FacesViewController+ImagePickerDelegate.swift */; };
+		04FCC90F2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC90E2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift */; };
 		04FCC9112385BAA9008FB1DD /* FaceSaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC9102385BAA9008FB1DD /* FaceSaveViewModel.swift */; };
 		04FCC9132385BBB4008FB1DD /* Pictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC9122385BBB4008FB1DD /* Pictures.swift */; };
+		04FCC9162385EBFD008FB1DD /* FacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC9152385EBFD008FB1DD /* FacesTableViewCell.swift */; };
+		04FCC9182385ED3C008FB1DD /* FacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCC9172385ED3C008FB1DD /* FacesViewController.swift */; };
 		5A05A1F5D3DD7A058CB25386 /* Pods_FaceDetectionUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D4895C658ACBFA2E83FE6D /* Pods_FaceDetectionUITests.framework */; };
 		6B6AFC383D0C35046AF7D303 /* Pods_FaceDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE62DCA03CCBBFD1E1C1C17B /* Pods_FaceDetection.framework */; };
 		C039235EFF4C3A1C583104FD /* Pods_FaceDetectionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D88E6F07127B4A2FC702A8 /* Pods_FaceDetectionTests.framework */; };
@@ -56,7 +59,7 @@
 /* Begin PBXFileReference section */
 		0413242323815A67002A40DA /* FaceDetection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceDetection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0413242623815A67002A40DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0413242823815A67002A40DA /* FacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesViewController.swift; sourceTree = "<group>"; };
+		0413242823815A67002A40DA /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		0413242B23815A67002A40DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0413242D23815A6C002A40DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0413243023815A6C002A40DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		0413245E23816D8E002A40DA /* FaceRegionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceRegionData.swift; sourceTree = "<group>"; };
 		04132462238171F4002A40DA /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		041324642381732F002A40DA /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0419DF2C238606C0000A0BB8 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		04770068A9B040F978B7D650 /* Pods-FaceDetectionUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceDetectionUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FaceDetectionUITests/Pods-FaceDetectionUITests.release.xcconfig"; sourceTree = "<group>"; };
 		04FCC8F72381861B008FB1DD /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		04FCC8F923818648008FB1DD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -83,9 +87,11 @@
 		04FCC905238316B6008FB1DD /* BusyLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusyLoader.swift; sourceTree = "<group>"; };
 		04FCC907238462C1008FB1DD /* FaceCropViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCropViewModel.swift; sourceTree = "<group>"; };
 		04FCC90923846DEF008FB1DD /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
-		04FCC90E2385B7C1008FB1DD /* FacesViewController+ImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FacesViewController+ImagePickerDelegate.swift"; sourceTree = "<group>"; };
+		04FCC90E2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TagsViewController+ImagePickerDelegate.swift"; sourceTree = "<group>"; };
 		04FCC9102385BAA9008FB1DD /* FaceSaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceSaveViewModel.swift; sourceTree = "<group>"; };
 		04FCC9122385BBB4008FB1DD /* Pictures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pictures.swift; sourceTree = "<group>"; };
+		04FCC9152385EBFD008FB1DD /* FacesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesTableViewCell.swift; sourceTree = "<group>"; };
+		04FCC9172385ED3C008FB1DD /* FacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesViewController.swift; sourceTree = "<group>"; };
 		19DCABEFC45999E7BFC5FAF5 /* Pods-FaceDetection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceDetection.release.xcconfig"; path = "Pods/Target Support Files/Pods-FaceDetection/Pods-FaceDetection.release.xcconfig"; sourceTree = "<group>"; };
 		23D5C47937AAD06CC4A3CC4F /* Pods-FaceDetectionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceDetectionTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FaceDetectionTests/Pods-FaceDetectionTests.debug.xcconfig"; sourceTree = "<group>"; };
 		45FBCE0A69E7B32B70393F94 /* Pods-FaceDetectionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceDetectionTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FaceDetectionTests/Pods-FaceDetectionTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -227,8 +233,10 @@
 		04FCC90B2385B739008FB1DD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0413242823815A67002A40DA /* FacesViewController.swift */,
-				04FCC90E2385B7C1008FB1DD /* FacesViewController+ImagePickerDelegate.swift */,
+				0413242823815A67002A40DA /* TagsViewController.swift */,
+				04FCC90E2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift */,
+				04FCC9172385ED3C008FB1DD /* FacesViewController.swift */,
+				0419DF2C238606C0000A0BB8 /* MainTabBarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 		04FCC90C2385B74F008FB1DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04FCC9142385EBDD008FB1DD /* Cells */,
 				0413242F23815A6C002A40DA /* LaunchScreen.storyboard */,
 				0413242A23815A67002A40DA /* Main.storyboard */,
 			);
@@ -248,6 +257,14 @@
 				0413242D23815A6C002A40DA /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		04FCC9142385EBDD008FB1DD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				04FCC9152385EBFD008FB1DD /* FacesTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		4E452370A263E4CC7F74DE19 /* Frameworks */ = {
@@ -432,15 +449,15 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FaceDetection/Pods-FaceDetection-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,11 +509,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				04FCC9132385BBB4008FB1DD /* Pictures.swift in Sources */,
-				04FCC90F2385B7C1008FB1DD /* FacesViewController+ImagePickerDelegate.swift in Sources */,
+				04FCC90F2385B7C1008FB1DD /* TagsViewController+ImagePickerDelegate.swift in Sources */,
 				04FCC9112385BAA9008FB1DD /* FaceSaveViewModel.swift in Sources */,
+				0419DF2D238606C0000A0BB8 /* MainTabBarViewController.swift in Sources */,
 				04FCC8F82381861B008FB1DD /* APIRouter.swift in Sources */,
 				0413245923816BF7002A40DA /* FaceDetection.swift in Sources */,
 				04FCC906238316B6008FB1DD /* BusyLoader.swift in Sources */,
+				04FCC9162385EBFD008FB1DD /* FacesTableViewCell.swift in Sources */,
 				04FCC908238462C1008FB1DD /* FaceCropViewModel.swift in Sources */,
 				04FCC8FE23818C4A008FB1DD /* APIManager.swift in Sources */,
 				04FCC90323831138008FB1DD /* FaceDetectorViewModel.swift in Sources */,
@@ -506,7 +525,8 @@
 				0413245B23816CB6002A40DA /* FaceOutput.swift in Sources */,
 				04FCC8FA23818648008FB1DD /* Constants.swift in Sources */,
 				04FCC8FC23818A13008FB1DD /* FaceDetectorService.swift in Sources */,
-				0413242923815A67002A40DA /* FacesViewController.swift in Sources */,
+				0413242923815A67002A40DA /* TagsViewController.swift in Sources */,
+				04FCC9182385ED3C008FB1DD /* FacesViewController.swift in Sources */,
 				0413245F23816D8E002A40DA /* FaceRegionData.swift in Sources */,
 				0413242723815A67002A40DA /* AppDelegate.swift in Sources */,
 			);

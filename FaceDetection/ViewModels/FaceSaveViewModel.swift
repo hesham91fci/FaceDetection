@@ -8,9 +8,12 @@
 
 import Foundation
 import UIKit
+import RxSwift
 struct FaceSaveViewModel {
-    
-    
+    private let savedTagsSubject:BehaviorSubject<[Tag]> = BehaviorSubject(value: [])
+    var observableTags: Observable<[Tag]>{
+        return self.savedTagsSubject.asObservable()
+    }
     fileprivate func saveNewFace(_ savedPictures: inout Pictures, _ mainImage: UIImage, _ personFace: UIImage, _ personName: String, _ faceRegion: CGRect) {
         var tags = savedPictures.tagsDictionary[mainImage.pngData()!] ?? []
         let newTag = Tag(personFace: personFace, personName: personName, faceRegion: faceRegion, includingPicture: mainImage)
@@ -48,22 +51,36 @@ struct FaceSaveViewModel {
         savePicture(pictures)
     }
     
-    private func getPicturesFromUserDefaults()->Pictures{
+    
+    
+    func getPicturesFromUserDefaults()->Pictures{
         if let oldPicturesData = UserDefaults.standard.object(forKey: UserDefaultsKeys.pictures) as? Data {
             let decoder = JSONDecoder()
             if let loadedPicture = try? decoder.decode(Pictures.self, from: oldPicturesData) {
+                emitTags(loadedPicture)
                 return loadedPicture
             }
         }
-        return Pictures()
+        let newPictures = Pictures()
+        self.savedTagsSubject.onNext([])
+        return newPictures
     }
     
-    fileprivate func savePicture(_ pictures: Pictures) {
-        print("saving")
+    private func savePicture(_ pictures: Pictures) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(pictures) {
             UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.pictures)
+            UserDefaults.standard.synchronize()
         }
+        emitTags(pictures)
+    }
+    
+    private func emitTags(_ loadedPicture: Pictures) {
+        var tagsList:[Tag] = []
+        loadedPicture.tagsDictionary.forEach { (_, tags) in
+            tagsList.append(contentsOf: tags)
+        }
+        self.savedTagsSubject.onNext(tagsList)
     }
     
 }
