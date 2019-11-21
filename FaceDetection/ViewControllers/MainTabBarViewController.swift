@@ -38,6 +38,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate {
         self.viewControllers?.forEach({ (controller) in
             if let facesViewController = controller as? FacesViewController{
                 facesViewController.mainTabBarController = self
+                facesViewController.faceSaveViewModel = self.faceSaveViewModel
             }
         })
     }

@@ -22,7 +22,6 @@ class FacesViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.faceSaveViewModel?.getPicturesFromUserDefaults()
     }
     func subcribeForFaceTap(){
         self.facesTableView.rx.itemSelected
@@ -50,8 +49,5 @@ class FacesViewController: UIViewController {
                         cell.configureFaceCell(tag: tag)
             }
             .disposed(by: disposeBag)
-        self.faceSaveViewModel?.observableAllTags.bind(onNext: { (tags) in
-            print("emitted")
-        }).disposed(by: disposeBag)
     }
 }
