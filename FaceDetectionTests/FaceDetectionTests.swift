@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import RxSwift
 @testable import FaceDetection
 
 class FaceDetectionTests: XCTestCase {
@@ -18,10 +19,23 @@ class FaceDetectionTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testCountFaces() {
+        let disposeBag = DisposeBag()
+        let testImage = UIImage(named: "test")
+        let mainImage:UIImageView = UIImageView(image: testImage)
+        let numberOfFaces = 4
+        let faceDetectorViewModel:FaceDetectorViewModel = FaceDetectorViewModel()
+        let serviceExpectation = expectation(description: "Recognition waiting expectation")
+        faceDetectorViewModel.observableFaces.bind(onNext: { (rectangles) in
+            XCTAssertTrue(rectangles.count == numberOfFaces)
+            serviceExpectation.fulfill()
+            }).disposed(by: disposeBag)
+        faceDetectorViewModel.recognizeFaces(image: mainImage)
+        waitForExpectations(timeout: 5, handler: nil)
+
     }
 
     func testPerformanceExample() {
